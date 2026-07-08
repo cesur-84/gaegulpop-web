@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
-<script>
-/* 수정계획 1번-A: 게임 내부 에러(스택오버플로 등)가 나도 사용자에게 무서운 alert 팝업이 안 뜨게 억제 */
+<script>/* [game alert suppressed] */
 (function(){
-  window.alert = function(m){ try{ console.warn('[game alert suppressed]', m); }catch(e){} };
-  window.addEventListener('unhandledrejection', function(e){ try{ e.preventDefault(); }catch(x){} }, true);
+  var _alert = window.alert;
+  window.alert = function(m){ try{ console.warn('[suppressed alert]', m); }catch(e){} };
+  window.addEventListener('unhandledrejection', function(e){ try{ console.warn('[suppressed rejection]', e.reason); }catch(_){} e.preventDefault(); });
+  window.addEventListener('error', function(e){ try{ if(e && e.message && /call stack/i.test(e.message)){ console.warn('[suppressed error]', e.message); e.preventDefault(); return false; } }catch(_){} });
 })();
 </script>
+
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Unity Web Player | Gaegulpop</title>
@@ -68,7 +70,7 @@
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "Gaegulpop",
-        productVersion: "0.2.5",
+        productVersion: "0.2.6",
         showBanner: unityShowBanner,
         // errorHandler: function(err, url, line) {
         //    alert("error " + err + " occurred at line " + line);
