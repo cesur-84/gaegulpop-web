@@ -6,11 +6,12 @@
   try {
     var h = (window.location.hash||'').replace(/^#/,'');
     if (window.opener && h.indexOf('access_token=')>=0) {
-      var a='', r='';
+      var a='', r='', x='';
       h.split('&').forEach(function(kv){ var p=kv.split('=');
         if(p[0]==='access_token') a=decodeURIComponent(p[1]||'');
-        if(p[0]==='refresh_token') r=decodeURIComponent(p[1]||''); });
-      if(a){ try{ localStorage.setItem('ggp_access',a); localStorage.setItem('ggp_refresh',r); }catch(e){} }
+        if(p[0]==='refresh_token') r=decodeURIComponent(p[1]||'');
+        if(p[0]==='expires_at') x=decodeURIComponent(p[1]||''); });
+      if(a){ try{ localStorage.setItem('ggp_access',a); localStorage.setItem('ggp_refresh',r); if(x) localStorage.setItem('ggp_expires_at',x); }catch(e){} }
       try{ window.opener.postMessage({ggpAuth:true},'*'); }catch(e){}
       try{ window.stop(); }catch(e){}
       try{ document.title='로그인 완료'; document.write('<body style="background:#0c1a0c;color:#cdeccb;font-family:sans-serif;text-align:center;padding-top:40vh">로그인 완료! 이 창은 자동으로 닫혀요.</body>'); document.close(); }catch(e){}
@@ -76,16 +77,16 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/1838682b7a513857da96555311f53052.loader.js";
+      var loaderUrl = buildUrl + "/f3b43109df751d8b0d11463775e01841.loader.js";
       var config = {
         arguments: [],
-        dataUrl: buildUrl + "/a75a4252644a1da675b071cc1d3d6486.data.unityweb",
-        frameworkUrl: buildUrl + "/746abddde2c84515f1678542bed8e1cd.framework.js.unityweb",
-        codeUrl: buildUrl + "/f798e9412f3a83598b28a4b0050b4385.wasm.unityweb",
+        dataUrl: buildUrl + "/be8d9484e6e7b00e0288e1a8bf0e82ff.data.unityweb",
+        frameworkUrl: buildUrl + "/6c28fdff6dc8c92845df8871b3871d8a.framework.js.unityweb",
+        codeUrl: buildUrl + "/c3443ad5fad1e47c33658d558fe9ae93.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "Gaegulpop",
-        productVersion: "0.6.3",
+        productVersion: "0.6.6",
         showBanner: unityShowBanner,
         // errorHandler: function(err, url, line) {
         //    alert("error " + err + " occurred at line " + line);
