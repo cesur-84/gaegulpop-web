@@ -1,31 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
-<script>/* [game alert suppressed] */
-(function(){
-  try {
-    var h = (window.location.hash||'').replace(/^#/,'');
-    if (window.opener && h.indexOf('access_token=')>=0) {
-      var a='', r='', x='';
-      h.split('&').forEach(function(kv){ var p=kv.split('=');
-        if(p[0]==='access_token') a=decodeURIComponent(p[1]||'');
-        if(p[0]==='refresh_token') r=decodeURIComponent(p[1]||'');
-        if(p[0]==='expires_at') x=decodeURIComponent(p[1]||''); });
-      if(a){ try{ localStorage.setItem('ggp_access',a); localStorage.setItem('ggp_refresh',r); if(x) localStorage.setItem('ggp_expires_at',x); }catch(e){} }
-      try{ window.opener.postMessage({ggpAuth:true},'*'); }catch(e){}
-      try{ window.stop(); }catch(e){}
-      try{ document.title='로그인 완료'; document.write('<body style="background:#0c1a0c;color:#cdeccb;font-family:sans-serif;text-align:center;padding-top:40vh">로그인 완료! 이 창은 자동으로 닫혀요.</body>'); document.close(); }catch(e){}
-      setTimeout(function(){ try{ window.close(); }catch(e){} }, 300);
-      return;
-    }
-  } catch(e){}
-  var _alert = window.alert;
-  window.alert = function(m){ try{ console.warn('[suppressed alert]', m); }catch(e){} };
-  window.addEventListener('unhandledrejection', function(e){ try{ console.warn('[suppressed rejection]', e.reason); }catch(_){} e.preventDefault(); });
-  window.addEventListener('error', function(e){ try{ if(e && e.message && /call stack/i.test(e.message)){ console.warn('[suppressed error]', e.message); e.preventDefault(); return false; } }catch(_){} });
-})();
-</script>
-
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Unity Web Player | Gaegulpop</title>
@@ -77,16 +52,16 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/286593e86bd0fa7b78a6025d28cdc7db.loader.js";
+      var loaderUrl = buildUrl + "/70ddf8b8daf933861a3ceb2a7b44cef6.loader.js";
       var config = {
         arguments: [],
-        dataUrl: buildUrl + "/0f141eb8f308479e999bd651d327a5e7.data.unityweb",
+        dataUrl: buildUrl + "/0e2c034cd12c04720869d0e8d9cf2a05.data.unityweb",
         frameworkUrl: buildUrl + "/1bb63a8e8378ab4a77e42a46fc1cdf79.framework.js.unityweb",
-        codeUrl: buildUrl + "/96455a762349b6ca9ff23c6457e03d63.wasm.unityweb",
+        codeUrl: buildUrl + "/8f716a453b4db7ca9820f4c90e72f6af.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "Gaegulpop",
-        productVersion: "0.6.7",
+        productVersion: "0.6.8",
         showBanner: unityShowBanner,
         // errorHandler: function(err, url, line) {
         //    alert("error " + err + " occurred at line " + line);
@@ -154,19 +129,5 @@
       document.body.appendChild(script);
 
     </script>
-  
-<script>/* [ggp portrait fit] */
-(function(){
-  function fit(){
-    var c=document.querySelector('#unity-canvas'); if(!c) return;
-    c.style.position='fixed'; c.style.left='0'; c.style.top='0';
-    c.style.width='100%'; c.style.height='100%';
-    document.body.style.margin='0'; document.body.style.background='#0b140b';
-  }
-  window.addEventListener('resize', fit);
-  window.addEventListener('load', fit);
-  fit(); setTimeout(fit, 100); setTimeout(fit, 800);
-})();
-</script>
-</body>
+  </body>
 </html>
