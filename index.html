@@ -76,16 +76,16 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/130653e63580bfe39a0c541b59c1588e.loader.js";
+      var loaderUrl = buildUrl + "/1838682b7a513857da96555311f53052.loader.js";
       var config = {
         arguments: [],
-        dataUrl: buildUrl + "/bcf4aa658552843467639dc1e48fbe69.data.unityweb",
+        dataUrl: buildUrl + "/a75a4252644a1da675b071cc1d3d6486.data.unityweb",
         frameworkUrl: buildUrl + "/746abddde2c84515f1678542bed8e1cd.framework.js.unityweb",
-        codeUrl: buildUrl + "/977c45441e25cb9e823aebf7fd5d7794.wasm.unityweb",
+        codeUrl: buildUrl + "/f798e9412f3a83598b28a4b0050b4385.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "Gaegulpop",
-        productVersion: "0.6.2",
+        productVersion: "0.6.3",
         showBanner: unityShowBanner,
         // errorHandler: function(err, url, line) {
         //    alert("error " + err + " occurred at line " + line);
@@ -153,5 +153,19 @@
       document.body.appendChild(script);
 
     </script>
-  </body>
+  
+<script>/* [ggp portrait fit] */
+(function(){
+  function fit(){
+    var c=document.querySelector('#unity-canvas'); if(!c) return;
+    c.style.position='fixed'; c.style.left='0'; c.style.top='0';
+    c.style.width='100%'; c.style.height='100%';
+    document.body.style.margin='0'; document.body.style.background='#0b140b';
+  }
+  window.addEventListener('resize', fit);
+  window.addEventListener('load', fit);
+  fit(); setTimeout(fit, 100); setTimeout(fit, 800);
+})();
+</script>
+</body>
 </html>
