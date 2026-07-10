@@ -3,6 +3,21 @@
   <head>
 <script>/* [game alert suppressed] */
 (function(){
+  try {
+    var h = (window.location.hash||'').replace(/^#/,'');
+    if (window.opener && h.indexOf('access_token=')>=0) {
+      var a='', r='';
+      h.split('&').forEach(function(kv){ var p=kv.split('=');
+        if(p[0]==='access_token') a=decodeURIComponent(p[1]||'');
+        if(p[0]==='refresh_token') r=decodeURIComponent(p[1]||''); });
+      if(a){ try{ localStorage.setItem('ggp_access',a); localStorage.setItem('ggp_refresh',r); }catch(e){} }
+      try{ window.opener.postMessage({ggpAuth:true},'*'); }catch(e){}
+      try{ window.stop(); }catch(e){}
+      try{ document.title='로그인 완료'; document.write('<body style="background:#0c1a0c;color:#cdeccb;font-family:sans-serif;text-align:center;padding-top:40vh">로그인 완료! 이 창은 자동으로 닫혀요.</body>'); document.close(); }catch(e){}
+      setTimeout(function(){ try{ window.close(); }catch(e){} }, 300);
+      return;
+    }
+  } catch(e){}
   var _alert = window.alert;
   window.alert = function(m){ try{ console.warn('[suppressed alert]', m); }catch(e){} };
   window.addEventListener('unhandledrejection', function(e){ try{ console.warn('[suppressed rejection]', e.reason); }catch(_){} e.preventDefault(); });
@@ -61,16 +76,16 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/f4e35ac12a49abb410748ed9b3e24944.loader.js";
+      var loaderUrl = buildUrl + "/130653e63580bfe39a0c541b59c1588e.loader.js";
       var config = {
         arguments: [],
-        dataUrl: buildUrl + "/eaecc150319310e98a1726d0dea5bc8b.data.unityweb",
-        frameworkUrl: buildUrl + "/69ee69d6f5d09b902caf6ebb779d8d37.framework.js.unityweb",
-        codeUrl: buildUrl + "/1a149e5e922af917e8955051a6f6036f.wasm.unityweb",
+        dataUrl: buildUrl + "/bcf4aa658552843467639dc1e48fbe69.data.unityweb",
+        frameworkUrl: buildUrl + "/746abddde2c84515f1678542bed8e1cd.framework.js.unityweb",
+        codeUrl: buildUrl + "/977c45441e25cb9e823aebf7fd5d7794.wasm.unityweb",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "DefaultCompany",
         productName: "Gaegulpop",
-        productVersion: "0.6.1",
+        productVersion: "0.6.2",
         showBanner: unityShowBanner,
         // errorHandler: function(err, url, line) {
         //    alert("error " + err + " occurred at line " + line);
