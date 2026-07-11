@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>개굴팝 — 로그인 완료</title>
+<style>
+  html,body{margin:0;height:100%;font-family:sans-serif;background:#1d3b24;color:#fff7e0;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+  .frog{font-size:72px;margin-bottom:12px}
+  h1{font-size:22px;margin:0 0 6px}
+  p{font-size:15px;opacity:.85;margin:0 0 26px}
+  a.btn{display:inline-block;background:#57a05a;color:#fff;text-decoration:none;
+    padding:18px 44px;border-radius:16px;font-size:20px;font-weight:bold;
+    box-shadow:0 4px 0 #3c7340}
+  a.btn:active{transform:translateY(3px);box-shadow:0 1px 0 #3c7340}
+  .tip{margin-top:22px;font-size:12px;opacity:.55}
+</style>
+</head>
+<body>
+  <div class="frog">🐸</div>
+  <h1>로그인 완료!</h1>
+  <p>게임으로 돌아가는 중이에요...</p>
+  <a id="btn" class="btn" href="#">게임으로 돌아가기</a>
+  <div class="tip">자동으로 안 열리면 위 버튼을 눌러주세요</div>
+<script>
+  // 안드로이드 앱 복귀 다리 (2026-07-11): 크롬은 서버 리다이렉트로는 앱 스킴을 차단하므로
+  // 이 페이지가 토큰(#해시)을 그대로 들고 앱 스킴으로 넘겨준다. 자동 시도 + 버튼(사용자 제스처 = 100% 허용).
+  var target = "gaegulpop://login" + (location.hash || "");
+  document.getElementById("btn").setAttribute("href", target);
+  setTimeout(function () { try { location.replace(target); } catch (e) {} }, 350);
+</script>
+</body>
+</html>
