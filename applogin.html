@@ -26,9 +26,20 @@
 <script>
   // 안드로이드 앱 복귀 다리 (2026-07-11): 크롬은 서버 리다이렉트로는 앱 스킴을 차단하므로
   // 이 페이지가 토큰(#해시)을 그대로 들고 앱 스킴으로 넘겨준다. 자동 시도 + 버튼(사용자 제스처 = 100% 허용).
-  var target = "gaegulpop://login" + (location.hash || "");
-  document.getElementById("btn").setAttribute("href", target);
-  setTimeout(function () { try { location.replace(target); } catch (e) {} }, 350);
+  // 이슈 117 (갤럭시 S25 복귀 실패): 삼성 인터넷은 커스텀 스킴 자동이동을 크롬보다 강하게 차단 →
+  // 안드로이드 표준 intent:// URL을 2차 경로로 추가. intent://는 #프래그먼트를 못 실으므로
+  // 토큰을 ?쿼리로 전달 (앱 v0.10.3+가 쿼리도 파싱).
+  var qs = (location.hash || "").replace(/^#/, "");
+  var scheme = "gaegulpop://login" + (qs ? "#" + qs : "");
+  var intent = "intent://login" + (qs ? "?" + qs : "") +
+               "#Intent;scheme=gaegulpop;package=com.cesur.gaegulpop;end";
+  var samsung = /SamsungBrowser/i.test(navigator.userAgent);
+  document.getElementById("btn").setAttribute("href", samsung ? intent : scheme);
+  setTimeout(function () { try { location.replace(scheme); } catch (e) {} }, 350);
+  // 스킴 자동이동이 막힌 경우(페이지가 아직 보이는 상태) intent URL로 2차 자동 시도
+  setTimeout(function () {
+    if (document.visibilityState === "visible") { try { location.replace(intent); } catch (e) {} }
+  }, 1400);
 </script>
 </body>
 </html>
