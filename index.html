@@ -157,14 +157,26 @@
   
 <script>/* [ggp portrait fit] */
 (function(){
+  var AR = 9/16;
   function fit(){
     var c=document.querySelector('#unity-canvas'); if(!c) return;
-    c.style.position='fixed'; c.style.left='0'; c.style.top='0';
-    c.style.width='100%'; c.style.height='100%';
+    var box=document.querySelector('#unity-container');
+    if(box){ box.className=''; box.style.cssText=
+      'position:fixed;left:0;top:0;width:100%;height:100%;transform:none;'; }
+    var ft=document.querySelector('#unity-footer'); if(ft) ft.style.display='none';
+    var vw=window.innerWidth, vh=window.innerHeight, w, h;
+    if(vw/vh > AR){ h=vh; w=Math.round(h*AR); }
+    else { w=vw; h=vh; }
+    c.style.position='fixed';
+    c.style.width=w+'px'; c.style.height=h+'px';
+    c.style.left=Math.round((vw-w)/2)+'px';
+    c.style.top=Math.round((vh-h)/2)+'px';
     document.body.style.margin='0'; document.body.style.background='#0b140b';
   }
   window.addEventListener('resize', fit);
+  window.addEventListener('orientationchange', fit);
   window.addEventListener('load', fit);
+  document.addEventListener('fullscreenchange', fit);
   fit(); setTimeout(fit, 100); setTimeout(fit, 800);
 })();
 </script>
